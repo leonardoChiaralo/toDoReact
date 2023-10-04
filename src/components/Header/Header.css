@@ -1,0 +1,17 @@
+.header {
+  width: 500px;
+
+  margin: 50px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  color: #f0f3f4;
+  font-family: "Pacifico", cursive;
+  font-size: 50px;
+  font-weight: bold;
+
+  text-align: center;
+
+  margin: 10px;
+}

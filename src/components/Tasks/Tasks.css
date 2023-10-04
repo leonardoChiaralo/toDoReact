@@ -1,0 +1,42 @@
+.todo {
+  background-color: #5d6d7e;
+  padding: 20px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.complete {
+  background-color: #5cb85c;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 5px;
+
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.remove {
+  background-color: #d9534f;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
