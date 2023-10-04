@@ -3,26 +3,31 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Form from "./components/Form";
-import AddBtn from "./components/AddBtn";
 
 function App() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      text: "Criar funcionalidade X no sistema",
+      text: "Teste 1",
       isCompleted: false,
     },
     {
       id: 2,
-      text: "Ir para a academia",
+      text: "Teste 2",
       isCompleted: false,
     },
     {
       id: 3,
-      text: "Estudar React",
+      text: "Teste 3",
       isCompleted: false,
     },
   ]);
+
+  const [showAdd, setShowAdd] = useState(false);
+
+  const showContainer = () => {
+    setShowAdd(!showAdd);
+  };
 
   const addTodo = (text) => {
     const newTodos = [
@@ -70,8 +75,10 @@ function App() {
           ))}
         </div>
       </section>
-      <AddBtn />
-      <Form addTodo={addTodo} />
+      <section className="addBtn">
+        <input type="button" value="Add Task" onClick={showContainer} />
+        {showAdd && <Form addTodo={addTodo} />}
+      </section>
     </div>
   );
 }
