@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Form from "./components/Form";
 import axios from "axios";
-import { async } from "q";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -53,12 +52,17 @@ function App() {
     await list();
   };
 
-  const completeTodo = (id) => {
-    const newTodos = [...todos];
-    newTodos.map((todo) =>
-      todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
-    );
-    setTodos(newTodos);
+  const completeTodo = async (id) => {
+    try {
+      await axios.put(`/list/${id}`);
+      const newTodos = [...todos];
+      newTodos.map((todo) =>
+        todo._id === id ? (todo.isCompleted = !todo.isCompleted) : todo
+      );
+      setTodos(newTodos);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

@@ -69,6 +69,18 @@ app.post("/", async (req, res) => {
   }
 });
 
+//UPDATE Method
+app.put("/list/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Task.findByIdAndUpdate(id);
+    res.send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: err });
+  }
+});
+
 //DELETE Method
 app.delete("/list/:id", async (req, res) => {
   console.log("deleteList", req.params);
