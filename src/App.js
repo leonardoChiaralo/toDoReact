@@ -1,53 +1,56 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Form from "./components/Form";
+import axios from "axios";
+import { async } from "q";
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "Teste 1",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      text: "Teste 2",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      text: "Teste 3",
-      isCompleted: false,
-    },
-  ]);
-
+  const [todos, setTodos] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+
+  useEffect(() => {
+    list();
+  }, []);
+
+  const list = async () => {
+    try {
+      const response = await axios.get("/list");
+      console.log(response);
+      setTodos(response.data);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const showContainer = () => {
     setShowAdd(!showAdd);
   };
 
-  const addTodo = (text) => {
-    const newTodos = [
-      ...todos,
-      {
-        id: Math.floor(Math.random() * 10000),
-        text,
-        isCompleted: false,
-      },
-    ];
+  const addTodo = async (text) => {
+    const newTodo = {
+      text,
+      isCompleted: false,
+    };
+    try {
+      await axios.post("/", newTodo);
+    } catch (err) {
+      console.error(err);
+    }
 
-    setTodos(newTodos);
+    await list();
   };
 
-  const removeTodo = (id) => {
-    const newTodos = [...todos];
-    const filteredTodos = newTodos.filter((todo) =>
-      todo.id !== id ? todo : null
-    );
-    setTodos(filteredTodos);
+  const removeTodo = async (id) => {
+    console.log(id);
+    try {
+      await axios.delete(`/list/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+
+    await list();
   };
 
   const completeTodo = (id) => {
@@ -67,7 +70,7 @@ function App() {
         <div>
           {todos.map((todo) => (
             <Tasks
-              key={todo.id}
+              key={todo._id}
               todo={todo}
               removeTodo={removeTodo}
               completeTodo={completeTodo}
