@@ -7,13 +7,11 @@ import axios from "axios";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
-    if (todos.length > 0) return;
     list();
-  }, [todos]);
-
-  const [showAdd, setShowAdd] = useState(false);
+  }, []);
 
   const list = async () => {
     try {
@@ -40,18 +38,18 @@ function App() {
       console.error(err);
     }
 
-    setTodos([]);
+    await list();
   };
 
-  const removeTodo = async (todos) => {
+  const removeTodo = async (id) => {
+    console.log(id);
     try {
-      await axios.delete(`/list/${todos._id}`, { method: "DELETE" });
-      todos.remove();
+      await axios.delete(`/list/${id}`);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
 
-    setTodos([]);
+    await list();
   };
 
   const completeTodo = (id) => {

@@ -48,8 +48,9 @@ app.get("/list", async (req, res) => {
   try {
     const tasks = await Task.find({});
     res.json(tasks);
-  } catch {
-    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: err });
   }
 });
 
@@ -61,19 +62,22 @@ app.post("/", async (req, res) => {
 
   try {
     await todoTask.save();
-    res.redirect("/");
-  } catch (error) {
-    res.redirect("/");
+    res.send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: err });
   }
 });
 
 //DELETE Method
-app.delete(`/list/:id`, async (req, res) => {
+app.delete("/list/:id", async (req, res) => {
+  console.log("deleteList", req.params);
   const id = req.params.id;
   try {
     await Task.findByIdAndRemove(id);
-    res.redirect("/");
-  } catch (error) {
-    res.redirect("/");
+    res.send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: err });
   }
 });
