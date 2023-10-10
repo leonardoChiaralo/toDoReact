@@ -11,10 +11,10 @@ const Tasks = ({ todo, removeTodo, completeTodo }) => {
       </div>
 
       <div>
-        <button className="complete" onClick={() => completeTodo(todo.id)}>
+        <button className="complete" onClick={() => completeTodo(todo._id)}>
           Complete
         </button>
-        <button className="remove" onClick={() => removeTodo(todo.id)}>
+        <button className="remove" onClick={() => removeTodo(todo._id)}>
           X
         </button>
       </div>
