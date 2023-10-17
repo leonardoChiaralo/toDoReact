@@ -33,7 +33,8 @@ function App() {
       isCompleted: false,
     };
     try {
-      await axios.post("/", newTodo);
+      const response = await axios.post("/", newTodo);
+      console.log("post:", response.data);
     } catch (err) {
       console.error(err);
     }
