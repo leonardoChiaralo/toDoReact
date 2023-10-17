@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Form from "./components/Form";
 import axios from "axios";
+import { response } from "express";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -33,7 +34,8 @@ function App() {
       isCompleted: false,
     };
     try {
-      await axios.post("/", newTodo);
+      const response = await axios.post("/", newTodo);
+      console.log("post:", response.data);
     } catch (err) {
       console.error(err);
     }

@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\" --coverage --silent=false",
     "eject": "react-scripts eject",
     "dev": "nodemon server/api.js"
   },
@@ -42,5 +42,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "axios-mock-adapter": "^1.22.0"
+  }
 }
