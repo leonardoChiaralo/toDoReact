@@ -56,6 +56,20 @@ function App() {
   const completeTodo = async (id) => {
     try {
       await axios.put(`/list/${id}`);
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo._id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+        )
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  /*
+  const completeTodo = async (id) => {
+    try {
+      await axios.put(`/list/${id}`);
       const newTodos = [...todos];
       newTodos.map((todo) =>
         todo._id === id ? (todo.isCompleted = !todo.isCompleted) : todo
@@ -65,6 +79,7 @@ function App() {
       console.error(err);
     }
   };
+  */
 
   return (
     <div className="App">

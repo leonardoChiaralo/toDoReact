@@ -34,6 +34,9 @@ const taskSchema = new mongoose.Schema({
     require: true,
     minlength: 1,
   },
+  isCompleted: {
+    type: Boolean,
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -69,6 +72,20 @@ app.post("/", async (req, res) => {
   }
 });
 
+app.put("/list/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const todo = await Task.findByIdAndUpdate(id);
+    todo.isCompleted = true;
+    await todo.save();
+    res.send();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: err });
+  }
+});
+
+/*
 //UPDATE Method
 app.put("/list/:id", async (req, res) => {
   const id = req.params.id;
@@ -80,6 +97,7 @@ app.put("/list/:id", async (req, res) => {
     res.status(500).send({ error: err });
   }
 });
+*/
 
 //DELETE Method
 app.delete("/list/:id", async (req, res) => {
