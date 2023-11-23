@@ -76,7 +76,9 @@ app.put("/list/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const todo = await Task.findByIdAndUpdate(id);
-    todo.isCompleted = true;
+    if (todo.isCompleted) todo.isCompleted = false;
+    else todo.isCompleted = true;
+
     await todo.save();
     res.send();
   } catch (err) {
