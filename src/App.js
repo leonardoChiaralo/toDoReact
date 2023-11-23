@@ -66,21 +66,6 @@ function App() {
     }
   };
 
-  /*
-  const completeTodo = async (id) => {
-    try {
-      await axios.put(`/list/${id}`);
-      const newTodos = [...todos];
-      newTodos.map((todo) =>
-        todo._id === id ? (todo.isCompleted = !todo.isCompleted) : todo
-      );
-      setTodos(newTodos);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  */
-
   return (
     <div className="App">
       <Header />
