@@ -72,6 +72,7 @@ app.post("/", async (req, res) => {
   }
 });
 
+//UPDATE Method
 app.put("/list/:id", async (req, res) => {
   const id = req.params.id;
   try {
